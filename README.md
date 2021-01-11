@@ -1,7 +1,7 @@
 # IEC61850 wrapper API
 IEC61850 wrapper API is developed to read parameters from the IED devices and write parameters to the IED devices using IEC61850 protocol this API is made in such way that we can read multipe varaible groups inlcuding  parameter value, quality and timestamp in a single request, it also has the feature to read the dataset, writig values and control object commands this library will work on windows and linux both platforms. <br />
 
-Note: This library can run in any computer where docker is installed without installing docker required applications. <br /> 
+Note: This library can run in any computer where docker is installed. 
 
 # Reading steps:
 ###### 1. Reading multiple parameter groups. <br />
