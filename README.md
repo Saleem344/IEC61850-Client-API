@@ -13,7 +13,7 @@ Note: This library can run in any computer where docker is installed.
     body input: {
             "ipaddress": "192.168.0.211",
             "port":102,
-            "devicename":"PQMLD0",
+            "logicaldevicename":"PQMLD0",
             "varaddress":["M03_MMXU1$MX$PhV$phsA",
                         "M03_MMXU1$MX$TotW",
                         "M03_MMXU1$MX$TotVAr",
