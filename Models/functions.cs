@@ -17,7 +17,7 @@ namespace tag_functions
         {
             _subSvc = dbService;
         }
-        public ResultMultipleModel ReadMultipleGroups(string hostip, Int32 port, string devicename, string[] vargroup)
+        public ResultMultipleModel ReadMultipleGroups(string hostip, Int32 port, string logicaldevicename, string[] vargroup)
         {   //instance
             IedConnection con = new IedConnection();
 
@@ -35,7 +35,7 @@ namespace tag_functions
                 //mms connecton
                 MmsConnection mmsConnection = con.GetMmsConnection();
                 //read data
-                MmsValue mmsresult = mmsConnection.ReadMultipleVariables(devicename, variable_group);
+                MmsValue mmsresult = mmsConnection.ReadMultipleVariables(logicaldevicename, variable_group); 
                 //connection close
                 con.Abort();
                 //result list
@@ -50,7 +50,7 @@ namespace tag_functions
                 
                 foreach (MmsValue address in mmsresult)
                 {
-                                        
+                                                           
                     if(address.Size() == 4)
                     {
                         ValueTuple = dataExtract.ExtractValue(address.GetElement(0));
@@ -128,7 +128,6 @@ namespace tag_functions
                 var FunctionCode = dataExtract.ExtractFC(FC);
                 //read group
                 MmsValue mmsresult = con.ReadValue(vargroup, FunctionCode);
-
                 //con close
                 con.Abort();
 
@@ -141,7 +140,6 @@ namespace tag_functions
                 
                 if (mmsresult.GetType() == MmsType.MMS_STRUCTURE)
                 {
-
                     if(mmsresult.Size() == 4)
                     {
                         ValueTuple = dataExtract.ExtractValue(mmsresult.GetElement(0));
@@ -357,6 +355,7 @@ namespace tag_functions
                 con.Connect(hostip, port);
                 //read data set
                 DataSet mmsresult = con.ReadDataSetValues(dataaddress,null);
+
                 //get data set values
                 List<Dataset_Result> valuelist = new List<Dataset_Result>();
                 data_extract dataExtract = new data_extract();

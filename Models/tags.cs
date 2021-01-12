@@ -7,7 +7,7 @@ namespace Models
     {
         public string IpAddress { get; set; }
         public Int16 Port { get; set; }
-        public string DeviceName { get; set; }
+        public string LogicalDevicename { get; set; }
         public string[] VarAddress { get; set; }
     }
     public class Readsingle_Group

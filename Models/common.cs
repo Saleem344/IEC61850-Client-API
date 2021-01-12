@@ -8,47 +8,23 @@ namespace common_functions
     {
         public dynamic ExtractValue(dynamic value)
         {
-            
-            dynamic result = null;
-            string Parse;
-            if (value.ToString().Contains("{") || value.ToString().Contains("}"))
+            switch (value.GetType())
             {
-
-                Parse = value.ToString().Replace("{", "").Replace("}", "");
-
-                if(value.GetType() == MmsType.MMS_BOOLEAN)
-                    result = bool.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_INTEGER)
-                    result = int.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_FLOAT)
-                    result = float.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_BIT_STRING)
-                    result = Convert.ToInt16(value.ToString(), 2);
-                else if(value.GetType() == MmsType.MMS_UTC_TIME)
-                    result = value.GetUtcTimeAsDateTimeOffset();
-                else if(value.GetType() == MmsType.MMS_STRUCTURE)
-                    result = float.Parse(Parse.ToString());
-                else
-                    result = value.ToString();
-
+                case MmsType.MMS_BOOLEAN:
+                    return value.GetBoolean();
+                case MmsType.MMS_INTEGER:
+                    return value.ToInt32();
+                case MmsType.MMS_FLOAT:
+                    return value.ToFloat ();
+                case MmsType.MMS_BIT_STRING:
+                    return Convert.ToInt16(value.ToString(), 2);
+                case MmsType.MMS_UTC_TIME:
+                    return value.GetUtcTimeAsDateTimeOffset();
+                case MmsType.MMS_STRUCTURE:
+                    return ExtractValue(value.GetElement(0));
+                default:
+                    return "";
             }
-            else
-            {
-                
-                if(value.GetType() == MmsType.MMS_BOOLEAN)
-                    result = bool.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_INTEGER)
-                    result = int.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_FLOAT)
-                    result = float.Parse(value.ToString());
-                else if(value.GetType() == MmsType.MMS_BIT_STRING)
-                    result = Convert.ToInt16(value.ToString(), 2);
-                else if(value.GetType() == MmsType.MMS_UTC_TIME)
-                    result = value.GetUtcTimeAsDateTimeOffset();
-                else
-                    result = value.ToString();
-            }
-            return result;
         }
         public dynamic ExtractFC(string value)
         {
@@ -94,7 +70,7 @@ namespace common_functions
             else if (value == "NONE")
                 result = FunctionalConstraint.NONE;
             else
-                result = "Invalid Function Code";
+                result = "";
             return result;
         }
     }

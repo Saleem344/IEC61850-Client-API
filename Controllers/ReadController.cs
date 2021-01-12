@@ -56,10 +56,10 @@ namespace iec61850
         {
             string IpAddress = rawdata.IpAddress;
             int Port = rawdata.Port;
-            string DeviceName = rawdata.DeviceName;
+            string LogicalDevicename = rawdata.LogicalDevicename;
             string[] VarAddress = rawdata.VarAddress;
             Read_Write readwrite = new Read_Write(_subSvc);
-            ResultMultipleModel data = readwrite.ReadMultipleGroups(IpAddress, Port, DeviceName, VarAddress);
+            ResultMultipleModel data = readwrite.ReadMultipleGroups(IpAddress, Port, LogicalDevicename, VarAddress);
             return Json(data);
 
         }
